@@ -1,3 +1,4 @@
+
 # DataHub — Analytics Platform
 
 A customized and Dockerized deployment of Apache Superset, rebranded as **DataHub** — a unified analytics and data visualization platform.
@@ -46,7 +47,9 @@ Open your browser and go to: `http://localhost:8088`
 
 ## Screenshots
 
-> Login page and dashboard screenshots can be added here.
+<img width="1366" height="768" alt="Screenshot (20)" src="https://github.com/user-attachments/assets/8922093a-15d5-4d3f-8a29-887d5dd1f80c" />
+<img width="1366" height="768" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/82ee7299-c94d-4a67-ae9c-472f657d50b7" />
+
 
 ## Author
 
