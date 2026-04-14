@@ -1,0 +1,27 @@
+version: "3"
+services:
+  datahub:
+    image: datahub-superset:latest
+    ports:
+      - "8088:8088"
+    environment:
+      - SUPERSET_SECRET_KEY=datahub_secret_key
+      - ADMIN_PASSWORD=admin
+    depends_on:
+      - db
+      - cache
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+    volumes:
+      - db_home:/var/lib/postgresql/data
+  cache:
+    image: redis:7
+    volumes:
+      - redis:/data
+volumes:
+  db_home:
+  redis:
