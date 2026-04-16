@@ -261,7 +261,7 @@ function BigNumberVis({
   };
 
   const rendermetricComparisonSummary = (maxHeight: number) => {
-    const { width } = props;
+    const { width,trendColor} = props;
     let fontSize = 0;
 
     const text = subheader;
@@ -280,6 +280,13 @@ function BigNumberVis({
       } finally {
         container.remove();
       }
+       console.log('=== BigNumber Debug ===');
+  console.log('Trendcolor:', trendColor);
+  console.log('subheader text:', subheader);
+  console.log('All props:', props);
+  
+  // Force color for testing
+  const color = trendColor || 'inherit';
 
       return (
         <div
@@ -288,6 +295,7 @@ function BigNumberVis({
           style={{
             fontSize,
             height: maxHeight,
+            color:color,
           }}
         >
           {text}

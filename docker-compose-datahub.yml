@@ -1,7 +1,8 @@
 version: "3"
 services:
   datahub:
-    build: .
+    build: 
+      context: .
     ports:
       - "8088:8088"
     environment:

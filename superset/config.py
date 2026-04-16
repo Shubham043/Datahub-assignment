@@ -902,8 +902,19 @@ COMMON_BOOTSTRAP_OVERRIDES_FUNC: Callable[  # noqa: E731
 #     }]
 
 # This is merely a default
-EXTRA_CATEGORICAL_COLOR_SCHEMES: list[dict[str, Any]] = []
-
+EXTRA_CATEGORICAL_COLOR_SCHEMES: list[dict[str, Any]] = [
+    {
+        "id": "dataHubPurple",
+        "description": "DataHub Purple Palette",
+        "label": "DataHub Purple",
+        "isDefault": True,
+        "colors": [
+            "#7C3AED", "#4C1D95", "#8B5CF6", "#C4B5FD",
+            "#5B21B6", "#A78BFA", "#DDD6FE", "#2E1065",
+            "#6D28D9", "#EDE9FE"
+        ]
+    }
+]
 # -----------------------------------------------------------------------------
 # Theme System Configuration
 # -----------------------------------------------------------------------------

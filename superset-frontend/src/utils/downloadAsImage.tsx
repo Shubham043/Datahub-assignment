@@ -431,10 +431,30 @@ export default function downloadAsImageOptimized(
           cacheBust: true,
         });
 
-        const link = document.createElement('a');
-        link.download = `${generateFileStem(description)}.jpg`;
-        link.href = dataUrl;
-        link.click();
+        const canvas = document.createElement('canvas');
+const img = new Image();
+img.src = dataUrl;
+await new Promise(resolve => { img.onload = resolve; });
+
+canvas.width = img.width;
+canvas.height = img.height;
+const ctx = canvas.getContext('2d')!;
+ctx.drawImage(img, 0, 0);
+
+// DataHub watermark
+ctx.globalAlpha = 0.15;
+ctx.fillStyle = '#7C3AED';
+ctx.font = `bold ${img.width * 0.04}px Arial`;
+ctx.textAlign = 'right';
+ctx.textBaseline = 'bottom';
+ctx.fillText('DataHub', img.width - 20, img.height - 20);
+ctx.globalAlpha = 1.0;
+
+const watermarkedUrl = canvas.toDataURL('image/jpeg', IMAGE_DOWNLOAD_QUALITY);
+const link = document.createElement('a');
+link.download = `${generateFileStem(description)}.jpg`;
+link.href = watermarkedUrl;
+link.click();
       } catch (error) {
         console.error('Creating image failed', error);
         addWarningToast(
@@ -478,12 +498,29 @@ export default function downloadAsImageOptimized(
       });
 
       cleanup();
-      cleanup = null;
+cleanup = null;
 
-      const link = document.createElement('a');
-      link.download = `${generateFileStem(description)}.jpg`;
-      link.href = dataUrl;
-      link.click();
+const canvas = document.createElement('canvas');
+const img = new Image();
+img.src = dataUrl;
+await new Promise(resolve => { img.onload = resolve; });
+canvas.width = img.width;
+canvas.height = img.height;
+const ctx = canvas.getContext('2d')!;
+ctx.drawImage(img, 0, 0);
+ctx.globalAlpha = 0.15;
+ctx.fillStyle = '#7C3AED';
+ctx.font = `bold ${img.width * 0.04}px Arial`;
+ctx.textAlign = 'right';
+ctx.textBaseline = 'bottom';
+ctx.fillText('DataHub', img.width - 20, img.height - 20);
+ctx.globalAlpha = 1.0;
+const watermarkedUrl = canvas.toDataURL('image/jpeg', IMAGE_DOWNLOAD_QUALITY);
+
+const link = document.createElement('a');
+link.download = `${generateFileStem(description)}.jpg`;
+link.href = watermarkedUrl;
+link.click();
     } catch (error) {
       console.error('Creating image failed', error);
       addWarningToast(

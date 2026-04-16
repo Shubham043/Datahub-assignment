@@ -202,15 +202,14 @@ export default function transformProps(
     if (compareIndex < sortedData.length) {
       const compareFromValue = sortedData[compareIndex][1];
       const compareToValue = sortedData[0][1];
-      // compare values must both be non-nulls
       if (compareToValue !== null && compareFromValue !== null) {
         percentChange = compareFromValue
           ? (Number(compareToValue) - compareFromValue) /
             Math.abs(compareFromValue)
           : 0;
-        formattedSubheader = `${formatPercentChange(
-          percentChange,
-        )} ${compareSuffix}`;
+        // Add trend arrow based on direction
+        const arrow = percentChange > 0 ? '↑' : percentChange < 0 ? '↓' : '';
+      formattedSubheader = `${arrow} ${formatPercentChange(percentChange)} ${compareSuffix}`;
       }
     }
   }
@@ -225,11 +224,14 @@ export default function transformProps(
   }
 
   let className = '';
-  if (percentChange > 0) {
-    className = 'positive';
-  } else if (percentChange < 0) {
-    className = 'negative';
-  }
+let trendColor = 'inherit';
+if (percentChange > 0) {
+  className = 'positive';
+  trendColor = '#28a745';
+} else if (percentChange < 0) {
+  className = 'negative';
+  trendColor = '#dc3545';
+}
 
   const metricColtypeIndex = colnames.findIndex(name => name === metricName);
   const metricColtype =
@@ -385,6 +387,7 @@ export default function transformProps(
     // @ts-expect-error
     bigNumberFallback,
     className,
+    trendColor,
     headerFormatter: yAxisFormatter,
     formatTime,
     formData,
