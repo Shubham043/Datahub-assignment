@@ -31,11 +31,9 @@ A customized and Dockerized deployment of Apache Superset, rebranded as **DataHu
 git clone https://github.com/Shubham043/datahub-superset.git
 cd datahub-superset
 
-# 2. Build the custom Docker image
-docker build -t datahub-superset .
+# 2. Build and run the custom Docker image
+docker-compose -f docker-compose-datahub.yml up --build
 
-# 3. Start all services
-docker-compose -f docker-compose-datahub.yml up -d
 ```
 
 ### Access the app
